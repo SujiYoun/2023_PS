@@ -35,10 +35,10 @@ int selection(int* arr, int p, int r, int searchIdx)
 		if (q == searchIdx)
 			return arr[q];
 
-		if (q > searchIdx)
-			selection(arr, p, q - 1, searchIdx); //왼쪽 재귀
-		else if (q < searchIdx)
-			selection(arr, q + 1, r, searchIdx); //오른쪽 재귀
+		else if (q > searchIdx)
+			selection(arr, p, q - 1, searchIdx); //찾고자 하는 인덱스가 partition보다 작으면 왼쪽 재귀
+		else //if (q < searchIdx)
+			selection(arr, q + 1, r, searchIdx); //크면 오른쪽 재귀
 	
 	}
 }
