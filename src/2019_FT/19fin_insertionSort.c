@@ -7,7 +7,7 @@ void printList(int A[], int n)
 		printf("%d ", A[i]);
 	printf("\n");
 }
-
+//배열과 배열의 첫 인덱스, 마지막 인덱스를 매개변수로 받도록 수정
 void insertionSort2(int* A, int left, int right)
 {
 	int i, j, k, temp;
