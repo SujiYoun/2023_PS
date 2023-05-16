@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void pick(int item[], int n, int* picked, int m, int toPick, int* sum_num)
+void pick(int n, int* picked, int m, int toPick, int* sum_num)
 {
 	int i, j, smallest, lastIndex;
 	int sum;
@@ -11,10 +11,10 @@ void pick(int item[], int n, int* picked, int m, int toPick, int* sum_num)
 		sum = 0;
 		for (i = 0; i < m; i++) {
 			//printf("%d", picked[i]);
-			sum += item[picked[i]];
+			sum += picked[i];
 		}
 
-		if (sum == m && sum != 0) { //뽑은 1, 2의 합이 num과 같으면 picked안에 0뿐이면 0출력
+		if (sum == m) { //뽑은 1, 2의 합이 num과 같으면
 			/*for (i = 0; i < m; i++)
 				printf("%d", item[picked[i]]);
 			printf("\n");*/
@@ -36,23 +36,25 @@ void pick(int item[], int n, int* picked, int m, int toPick, int* sum_num)
 			picked[lastIndex + 1] = i;
 
 			//여기서 sum_num에 들어있는 건 주소값
-			pick(item, n, picked, m, toPick - 1, sum_num);
+			pick(n, picked, m, toPick - 1, sum_num);
 		}
 	}
 }
 int main(void)
 {
-	int item[] = { 1, 2, 0 };
 	int* picked;
 	int num, sum_num = 0;
 
 	scanf("%d", &num);
+	if (num < 1 || num > 900)
+		return 0;
+
 	picked = (int*)malloc(sizeof(int) * num);
 	if (picked == NULL)
 		return 0;
 
 	//주소값 넘겨주기
-	pick(item, 3, picked, num, num, &sum_num);
+	pick(3, picked, num, num, &sum_num);
 	printf("%d", sum_num);
 
 	free(picked);
