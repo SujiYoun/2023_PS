@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-int calDigits(int num) //ÀÚ¸®¼ö ¹İÈ¯
+int calDigits(int num) //ìë¦¬ìˆ˜ ë°˜í™˜
 {
 	int count;
 
@@ -18,5 +18,5 @@ int main(void)
 
 	scanf("%d", &num);
 
-	printf("%d", calDigits(num)); //ÀÚ¸®¼ö Ãâ·Â
+	printf("%d", calDigits(num)); //Ã€ÃšÂ¸Â®Â¼Ã¶ ÃƒÃ¢Â·Ã‚
 }
