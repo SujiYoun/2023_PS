@@ -20,7 +20,7 @@ int main(void)
 	scanf("%d", &num);
 
 	digitN = 0;
-	for (i = 1; i <= num; i++) {
+	for (i = 1; i <= num; i++) { //1부터 num까지 이어지는 수의 자리수 계산
 		digitN += calDigits(i);
 	}
 
