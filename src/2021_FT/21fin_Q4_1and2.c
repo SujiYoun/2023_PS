@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS //8ok
+#define _CRT_SECURE_NO_WARNINGS //8ok why?????????????????????
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,6 +33,13 @@ void pick(int n, int* picked, int m, int toPick, int* sum_num)
 
 	if (toPick > 0) {
 		for (i = smallest; i < n; i++) {
+			sum = 0;
+			for (j = 0; j <= lastIndex; j++)
+				sum += picked[j];
+
+			if (sum + i > m)
+				continue;
+
 			picked[lastIndex + 1] = i;
 
 			//여기서 sum_num에 들어있는 건 주소값
