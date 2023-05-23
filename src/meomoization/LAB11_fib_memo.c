@@ -3,14 +3,25 @@
 #include <stdlib.h>
 
 int fib(int num, int *F)
-{
-	if (num == 1 || num == 2)
-		F[num] = 1;
+{ //큰 문제부터 확인
+	if (F[num] == 0) { //메모에 저장되어 있지 않음
+		if (num == 1 || num == 2)
+			F[num] = 1;
 
-	if (F[num] == 0) //메모에 저장되어 있지 않음
-		F[num] = fib(num - 1, F) + fib(num - 2, F);
+		else
+			F[num] = fib(num - 1, F) + fib(num - 2, F); //메모에 저장
+	}
+	return F[num]; //저장된 피보나치 수 return
 
-	return F[num];
+	/* 작은 문제부터 확인
+	* if (F[num - 1] == 0)
+	*	F[num - 1] = fib(num - 1, F);
+	*
+	* if (F[num - 2] == 0)
+	*	F[num - 2] = fib(num - 2, F);
+	*
+	* return F[n - 1] + F[n - 2];
+	*/
 }
 
 int main(void)
@@ -30,7 +41,8 @@ int main(void)
 		F[i] = 0; //피보나치 수열에서 나올 수 없는 수
 
 	for (i = 1; i <= num; i++)
-		printf("%3d", fib(i, F));
+		printf("%3d", fib(i, F)); //?? 
+	printf("\n");
 
 	free(F);
 }

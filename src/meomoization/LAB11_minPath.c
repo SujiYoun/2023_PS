@@ -1,57 +1,55 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h> //memo 없는 코드
+#define _CRT_SECURE_NO_WARNINGS //Matrix Path Sum의 최소값 출력. memo 없는 버전
+#include <stdio.h>
 #include <stdlib.h>
-
-int matrixPath(int** matrix, int i, int j) { //예시코드에서 r, c 인수... 왜?
-	if (i == 0 && j == 0) //[0][0]
-		return matrix[i][j];
-
-	else if (i == 0) //위쪽 막힘. 
-		return matrixPath(matrix, i, j - 1) + matrix[i][j];
-
-	else if (j == 0) //왼쪽 막힘.
-		return matrixPath(matrix, i - 1, j) + matrix[i][j];
-	
+void readMatrix(int** m, int r, int c)
+{
+	int i, j;
+	for (i = 0; i < r; i++)
+		for (j = 0; j < c; j++)
+			scanf("%d", &m[i][j]);
+	return;
+}
+int matrixPath(int** m, int i, int j)
+{
+	if (i == 0 && j == 0) //m[0][0]
+		return m[i][j];
+	else if (i == 0) //위쪽 막힘
+		return matrixPath(m, i, j - 1) + m[i][j];
+	else if (j == 0) //왼쪽 막힘
+		return matrixPath(m, i - 1, j) + m[i][j];
 	else {
-		int upside = matrixPath(matrix, i - 1, j) + matrix[i][j];
-		int leftside = matrixPath(matrix, i, j - 1) + matrix[i][j];
+		int upside = matrixPath(m, i, j - 1); //위쪽으로 오는 경우
+		int leftside = matrixPath(m, i - 1, j); //왼쪽으로 오는 경우
 
-		if (upside < leftside) //점수가 더 적은 쪽을 return
-			return upside;
+		if (upside < leftside)
+			return upside + m[i][j];
 		else
-			return leftside;
+			return leftside + m[i][j];
 
 		/* 3항 연산자
 		return ((a < b) ? a : b) + m[i][j];*/
 	}
-
 }
 int main(void)
 {
-	int r, c;
-	int num1, num2;
-	int** matrix;
+	int** m;
+	int row, col, i, x, y;
 
-	scanf("%d %d", &r, &c);
+	scanf("%d %d", &row, &col);
+	m = (int**)malloc(sizeof(int*) * row);
+	for (i = 0; i < row; i++)
+		m[i] = (int*)malloc(sizeof(int) * col);
+	if (!m)
+		return;
 
-	//matrix 동적할당
-	matrix = (int**)malloc(sizeof(int*) * r);
-	for (int i = 0; i < r; i++)
-		matrix[i] = (int*)malloc(sizeof(int) * c);
-	if (matrix == NULL)
-		return 0;
+	readMatrix(m, row, col);
 
-	scanf("%d %d", &num1, &num2);
+	printf("(x, y): ");
+	scanf("%d %d", &x, &y);
+	
+	printf("%d\n", matrixPath(m, x, y));
 
-	//matrix 값 입력
-	for (int i = 0; i < r; i++) {
-		for (int j = 0; j < c; j++)
-			scanf("%d", &matrix[i][j]);
-	}
-
-	printf("%d\n", matrixPath(matrix, 3, 3));
-
-	for (int i = 0; i < r; i++)
-		free(matrix[i]); //열 반환
-	free(matrix); //행 반환
+	for (i = 0; i < row; i++)
+		free(m[i]);
+	free(m);
 }
