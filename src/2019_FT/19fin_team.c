@@ -12,9 +12,11 @@ void pick(int* members, int n, int* team1, int m, int toPick, int total, int *di
 			sum += members[team1[i]];
 		}
 
-		int tmpDiff = total - (sum * 2); //sum과 total - sum의 차
-		if (tmpDiff < 0)
-			tmpDiff *= -1;
+		int tmpDiff;  //sum과 total - sum의 차
+		if (total < sum * 2)
+			tmpDiff = (sum * 2) - total;
+		else
+			tmpDiff = total - (sum * 2);
 
 		if (tmpDiff < *diff || *diff == -1) //두 팀의 능력치 차 최소
 			*diff = tmpDiff;
