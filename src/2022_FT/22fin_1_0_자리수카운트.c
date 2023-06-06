@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include <stdio.h> //자리수 count
 int calDigits(int num) //자리수 반환
 {
 	int count;

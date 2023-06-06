@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+#include <stdio.h> //1부터 n까지의 수를 이어서 쓴 수의 자릿수 구하기
 int calDigits(int num) //자리수 반환
 {
 	int count;
